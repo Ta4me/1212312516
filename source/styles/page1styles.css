@@ -1,0 +1,158 @@
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
+
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f0f2f5; /* Пример: светлый фон */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%; /* Убедитесь, что секция занимает всю доступную ширину */
+    max-width: 1200px; /* Ограничьте ширину, если нужно */
+    padding: 20px;
+}
+
+.loud-link-hover {
+    position: relative;
+    width: 300px; /* Задайте фиксированную ширину для контейнера карточки */
+    height: 190px; /* Задайте фиксированную высоту */
+    cursor: pointer; /* Добавлено: Указывает, что элемент интерактивен */
+    perspective: 1000px; /* Добавлено: Создает 3D-перспективу для родителя вращающегося элемента */
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Более плавный и приятный переход */
+}
+
+/* ЭТО ГЛАВНОЕ ИЗМЕНЕНИЕ: мы используем класс 'is-flipped',
+   который будет переключаться JavaScript'ом, вместо :hover */
+.loud-link-hover.is-flipped .container {
+    transform: rotateY(180deg);
+}
+
+.card {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    /* Добавлено: Скрывает обратную сторону элемента при повороте */
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden; /* Для совместимости с Safari/iOS */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+    box-sizing: border-box;
+    color: #fff; /* Общий цвет текста */
+}
+
+.front-face {
+    background: linear-gradient(135deg, #FFD700, #FFA500); /* Золотой градиент */
+    transform: rotateY(0deg); /* Начальное положение */
+}
+
+.back-face {
+    background: linear-gradient(135deg, #8A2BE2, #4B0082); /* Фиолетовый градиент */
+    transform: rotateY(180deg); /* Изначально повернут для отображения после флипа */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Стили для содержимого карточки */
+.logo {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 10px; /* Отступ под логотипом */
+}
+
+.logo h5 {
+    font-family: 'Indie Flower', cursive;
+    font-size: 24px;
+    margin: 0;
+    line-height: 1; /* Убедимся, что нет лишних отступов */
+}
+
+.card-details {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Промежуток между блоками деталей */
+}
+
+.name-number {
+    display: flex;
+    flex-direction: column;
+}
+
+.name-number h6 {
+    font-size: 14px;
+    opacity: 0.7;
+    margin-bottom: 5px;
+}
+
+.name-number .number {
+    font-size: 28px;
+    letter-spacing: 2px;
+    margin: 0;
+}
+
+.name-number .name {
+    font-size: 20px;
+    text-transform: uppercase;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.valid-date {
+    display: flex;
+    flex-direction: column;
+    align-self: flex-end; /* Выравнивание внизу справа */
+    text-align: right;
+}
+
+.valid-date h6 {
+    font-size: 12px;
+    opacity: 0.7;
+    margin-bottom: 2px;
+}
+
+.valid-date h5 {
+    font-size: 16px;
+    margin: 0;
+    font-weight: bold;
+}
+
+.back-face h6 {
+    font-size: 18px; /* Немного крупнее для заголовка сзади */
+    opacity: 0.8;
+    margin-bottom: 15px;
+}
+
+.back-face h5 {
+    font-family: 'Indie Flower', cursive;
+    font-size: 22px;
+    line-height: 1.5;
+    margin: 0;
+    max-width: 80%; /* Ограничить ширину текста, если он слишком длинный */
+}
